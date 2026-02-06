@@ -1,0 +1,68 @@
+---
+const disciplines = [
+  'Business Administration',
+  'Nursing',
+  'Economics',
+  'Education',
+  'Computer Science',
+  'Engineering',
+  'Law',
+  'Public Health',
+  'Sociology',
+  'Political Science',
+  'Accounting',
+  'Psychology',
+  'Agriculture',
+  'Pharmacy',
+  'Development Studies',
+  'Communication Studies',
+  'Information Technology',
+  'Planning',
+];
+---
+
+<section class="py-16 md:py-section overflow-hidden border-t border-ink-faint">
+  <div class="px-6 sm:px-8 md:px-12 lg:px-24 mb-12 md:mb-16" data-scroll-reveal>
+    <span class="font-sans text-small tracking-widest uppercase text-ink-light">
+      Disciplines We Serve
+    </span>
+  </div>
+
+  <div id="disciplines-list" class="relative px-6 sm:px-8 md:px-12 lg:px-24">
+    {disciplines.map((d) => (
+      <p
+        class="discipline-item font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl py-3 md:py-4 text-ink-faint transition-colors duration-200"
+        data-discipline
+      >
+        {d}
+      </p>
+    ))}
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var items = document.querySelectorAll('[data-discipline]');
+    if (!items.length) return;
+
+    function updateOpacities() {
+      var viewportCenter = window.innerHeight / 2;
+
+      items.forEach(function (item) {
+        var rect = item.getBoundingClientRect();
+        var itemCenter = rect.top + rect.height / 2;
+        var distance = Math.abs(viewportCenter - itemCenter);
+        var maxDistance = window.innerHeight * 0.5;
+        var ratio = 1 - Math.min(distance / maxDistance, 1);
+
+        // Map ratio to opacity: closest = full white, farthest = dark grey
+        var opacity = 0.12 + ratio * 0.88;
+        item.style.color = 'rgba(240, 237, 232, ' + opacity + ')';
+      });
+    }
+
+    window.addEventListener('scroll', updateOpacities, { passive: true });
+    window.addEventListener('resize', updateOpacities);
+    updateOpacities();
+  })();
+</script>

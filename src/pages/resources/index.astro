@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import { getCollection } from 'astro:content';
+
+const resources = (await getCollection('resources')).sort(
+  (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf()
+);
+---
+
+<Layout title="Resources" description="Academic writing tips, handbooks, and how-to guides from Verbatim.">
+  <section class="px-6 sm:px-8 md:px-12 lg:px-24 pt-28 md:pt-40 pb-16 md:pb-section">
+    <!-- Page header -->
+    <div class="mb-12 md:mb-section max-w-3xl">
+      <span class="font-sans text-small tracking-widest uppercase text-ink-light">
+        Resources
+      </span>
+      <h1 class="font-serif text-display mt-4">
+        Thinking<br />
+        <span class="italic">Made Visible.</span>
+      </h1>
+      <p class="text-base md:text-body text-ink-light mt-8 md:mt-element max-w-lg">
+        Writing tips, methodological handbooks, and tactical how-tos
+        for students who take their work seriously.
+      </p>
+    </div>
+
+    <!-- Resource listing -->
+    <div class="max-w-3xl">
+      {resources.length > 0 ? (
+        resources.map((resource) => (
+          <ResourceCard
+            title={resource.data.title}
+            description={resource.data.description}
+            category={resource.data.category}
+            publishedDate={resource.data.publishedDate}
+            slug={resource.id.replace(/\.md$/, '')}
+          />
+        ))
+      ) : (
+        <p class="text-body text-ink-light">Resources coming soon.</p>
+      )}
+    </div>
+  </section>
+</Layout>

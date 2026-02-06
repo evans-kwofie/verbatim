@@ -1,0 +1,128 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map((resource) => ({
+    params: { slug: resource.id.replace(/\.md$/, '') },
+    props: { resource },
+  }));
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+
+const formattedDate = resource.data.publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout title={resource.data.title} description={resource.data.description}>
+  <article class="px-6 sm:px-8 md:px-12 lg:px-24 pt-28 md:pt-40 pb-16 md:pb-section">
+    <div class="max-w-2xl mx-auto">
+      <!-- Back link -->
+      <a
+        href="/resources"
+        class="inline-flex items-center gap-3 font-sans text-small tracking-widest uppercase text-ink-light hover:text-ink transition-colors duration-300 mb-10 md:mb-16"
+      >
+        <span class="block w-8 h-px bg-current"></span>
+        <span>Back to Resources</span>
+      </a>
+
+      <!-- Article header -->
+      <header class="mb-10 md:mb-16">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="font-sans text-small tracking-widest uppercase text-accent">
+            {resource.data.category}
+          </span>
+          <span class="w-1 h-1 rounded-full bg-ink-faint"></span>
+          <span class="font-sans text-small text-ink-light">
+            {formattedDate}
+          </span>
+        </div>
+
+        <h1 class="font-serif text-heading">
+          {resource.data.title}
+        </h1>
+
+        {resource.data.author && (
+          <p class="font-sans text-small text-ink-light mt-4">
+            By {resource.data.author}
+          </p>
+        )}
+      </header>
+
+      <!-- Article content -->
+      <div class="prose-verbatim">
+        <Content />
+      </div>
+
+      <!-- Bottom divider -->
+      <div class="mt-section pt-12 border-t border-ink-faint">
+        <a
+          href="/#briefing"
+          class="group inline-flex items-center gap-4 font-sans text-small tracking-widest uppercase text-ink hover:text-accent transition-colors duration-300"
+        >
+          <span>Ready to begin?</span>
+          <span class="block w-8 h-px bg-current transition-all duration-300 group-hover:w-14"></span>
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  .prose-verbatim {
+    @apply text-body leading-relaxed;
+  }
+
+  .prose-verbatim h2 {
+    @apply font-serif text-subheading mt-16 mb-6;
+  }
+
+  .prose-verbatim h3 {
+    @apply font-serif text-xl mt-12 mb-4;
+  }
+
+  .prose-verbatim p {
+    @apply mb-6 text-ink-light;
+  }
+
+  .prose-verbatim ul,
+  .prose-verbatim ol {
+    @apply mb-6 pl-6 text-ink-light;
+  }
+
+  .prose-verbatim li {
+    @apply mb-2;
+  }
+
+  .prose-verbatim strong {
+    @apply text-ink font-medium;
+  }
+
+  .prose-verbatim em {
+    @apply italic;
+  }
+
+  .prose-verbatim blockquote {
+    @apply border-l-2 border-accent pl-6 my-8 italic text-ink-light;
+  }
+
+  .prose-verbatim hr {
+    @apply my-12 border-ink-faint;
+  }
+
+  .prose-verbatim a {
+    @apply text-ink underline underline-offset-4 hover:text-accent transition-colors duration-300;
+  }
+
+  .prose-verbatim code {
+    @apply text-sm px-1.5 py-0.5 rounded;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background-color: rgba(42, 42, 42, 0.5);
+  }
+</style>

@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans text-body;
+    cursor: none;
+  }
+
+  ::selection {
+    @apply bg-accent text-paper;
+  }
+
+  /* Thin custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-paper;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink-faint;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-light;
+  }
+
+  /* Restore default cursor on touch devices */
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
+  }
+}
+
+/* ── Custom Cursor ── */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #F0EDE8;
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+
+.cursor-outline {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(240, 237, 232, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+}
+
+.cursor-outline.cursor-hover {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(139, 115, 85, 0.6);
+}
+
+/* Hide custom cursor on touch */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-outline {
+    display: none;
+  }
+}
+
+/* ── Ink Bleed View Transition ── */
+@keyframes ink-spread {
+  0% {
+    clip-path: circle(0% at 50% 50%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(150% at 50% 50%);
+    opacity: 1;
+  }
+}
+
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  animation: ink-spread 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 2;
+}
+
+/* ── Ink bleed overlay element ── */
+.ink-bleed-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #F0EDE8;
+  z-index: 9000;
+  pointer-events: none;
+  opacity: 0;
+  clip-path: circle(0% at 50% 50%);
+}
+
+.ink-bleed-overlay.active {
+  animation: ink-spread 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Utility animations ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }

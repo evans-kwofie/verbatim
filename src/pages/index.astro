@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Disciplines from '../components/Disciplines.astro';
+import PriceCalculator from '../components/PriceCalculator.astro';
+import BriefingForm from '../components/BriefingForm.astro';
+---
+
+<Layout title="Home">
+  <Hero />
+
+  <Disciplines />
+
+  <!-- Philosophy / Services section — monolithic statements -->
+  <section class="px-6 sm:px-8 md:px-12 lg:px-24 py-16 md:py-section border-t border-ink-faint">
+    <div class="max-w-4xl mx-auto space-y-12 md:space-y-section">
+      <div data-scroll-reveal>
+        <span class="font-sans text-small tracking-widest uppercase text-ink-light">
+          Philosophy
+        </span>
+      </div>
+
+      <p class="font-serif text-2xl md:text-heading" data-scroll-reveal>
+        Your thesis is not just an assignment.
+      </p>
+
+      <p class="font-serif text-2xl md:text-heading italic" data-scroll-reveal>
+        It is the definitive articulation of your intellectual labor.
+        It deserves more than a last-minute proofread.
+      </p>
+
+      <p class="font-serif text-2xl md:text-heading" data-scroll-reveal>
+        We work with students across Ghana who understand that precision
+        is not a luxury — it is the minimum standard.
+      </p>
+
+      <div class="pt-4 md:pt-8" data-scroll-reveal>
+        <div class="w-16 h-px bg-ink-faint"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-element">
+        <div data-scroll-reveal>
+          <span class="font-sans text-small tracking-widest uppercase block mb-3">
+            Rigor
+          </span>
+          <p class="text-base md:text-body">
+            Every argument stress-tested. Every citation verified. Every methodology interrogated.
+          </p>
+        </div>
+        <div data-scroll-reveal>
+          <span class="font-sans text-small tracking-widest uppercase block mb-3">
+            Discretion
+          </span>
+          <p class="text-base md:text-body">
+            Your work remains yours. Complete confidentiality, no templates, no recycled frameworks.
+          </p>
+        </div>
+        <div data-scroll-reveal>
+          <span class="font-sans text-small tracking-widest uppercase block mb-3">
+            Authority
+          </span>
+          <p class="text-base md:text-body">
+            Our consultants understand Ghanaian academic standards and deliver work that meets them.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <PriceCalculator />
+
+  <BriefingForm />
+</Layout>

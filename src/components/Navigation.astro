@@ -1,0 +1,142 @@
+---
+const links = [
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/#services' },
+  { label: 'In Their Words', href: '/in-their-words' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Briefing', href: '/#briefing' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-40">
+  <nav class="flex items-center justify-between px-6 sm:px-8 py-4 md:px-12 md:py-6">
+    <!-- Wordmark -->
+    <a href="/" class="font-serif text-lg md:text-xl text-ink tracking-wider uppercase">
+      Verbatim
+    </a>
+
+    <!-- Menu trigger -->
+    <button
+      id="nav-trigger"
+      type="button"
+      class="font-sans text-small text-ink tracking-widest uppercase hover:text-accent transition-colors duration-300"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-drawer"
+    >
+      Menu
+    </button>
+  </nav>
+</header>
+
+<!-- Full-screen drawer overlay -->
+<div
+  id="nav-drawer"
+  class="fixed inset-0 z-50 bg-paper flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-600"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+>
+  <!-- Close button -->
+  <button
+    id="nav-close"
+    type="button"
+    class="absolute top-6 right-8 md:top-8 md:right-12 font-sans text-small text-ink tracking-widest uppercase hover:text-accent transition-colors duration-300"
+    aria-label="Close navigation menu"
+  >
+    Close
+  </button>
+
+  <!-- Navigation links -->
+  <ul class="flex flex-col items-center gap-8 md:gap-12">
+    {links.map((link, i) => (
+      <li
+        class="overflow-hidden"
+        style={`--delay: ${i * 0.08}s`}
+      >
+        <a
+          href={link.href}
+          class="nav-link block font-serif text-4xl md:text-6xl text-ink hover:text-accent transition-colors duration-300 translate-y-full"
+          data-nav-link
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <!-- Decorative element -->
+  <div class="absolute bottom-8 left-8 md:bottom-12 md:left-12">
+    <span class="font-sans text-small text-ink-light tracking-widest uppercase opacity-40">
+      Est. 2025
+    </span>
+  </div>
+</div>
+
+<style>
+  [data-nav-link] {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    transition-delay: var(--delay, 0s);
+  }
+
+  #nav-drawer.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #nav-drawer.open [data-nav-link] {
+    transform: translateY(0);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const trigger = document.getElementById('nav-trigger');
+    const drawer = document.getElementById('nav-drawer');
+    const close = document.getElementById('nav-close');
+    const links = document.querySelectorAll('[data-nav-link]');
+
+    if (!trigger || !drawer || !close) return;
+
+    function openNav() {
+      drawer.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      // Reset link positions first for next open animation
+      links.forEach((link) => {
+        link.style.transform = 'translateY(100%)';
+      });
+
+      drawer.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+
+      // Reset links after transition
+      setTimeout(() => {
+        links.forEach((link) => {
+          link.style.transform = '';
+        });
+      }, 600);
+    }
+
+    trigger.addEventListener('click', openNav);
+    close.addEventListener('click', closeNav);
+
+    // Close on link click
+    links.forEach((link) => {
+      link.addEventListener('click', () => {
+        setTimeout(closeNav, 150);
+      });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeNav();
+      }
+    });
+  })();
+</script>

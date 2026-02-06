@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  publishedDate: Date;
+  slug: string;
+}
+
+const { title, description, category, publishedDate, slug } = Astro.props;
+
+const formattedDate = publishedDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+});
+---
+
+<article class="group border-b border-ink-faint py-8 md:py-10 first:pt-0 last:border-0">
+  <a href={`/resources/${slug}`} class="block">
+    <div class="flex items-start justify-between gap-4 md:gap-8">
+      <div class="flex-1 min-w-0">
+        <!-- Category + Date -->
+        <div class="flex flex-wrap items-center gap-2 md:gap-4 mb-3 md:mb-4">
+          <span class="font-sans text-small tracking-widest uppercase text-accent">
+            {category}
+          </span>
+          <span class="w-1 h-1 rounded-full bg-ink-faint"></span>
+          <span class="font-sans text-small text-ink-light">
+            {formattedDate}
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h3 class="font-serif text-lg md:text-subheading group-hover:text-accent transition-colors duration-300">
+          {title}
+        </h3>
+
+        <!-- Excerpt -->
+        <p class="text-sm md:text-body text-ink-light mt-2 md:mt-3 max-w-xl">
+          {description}
+        </p>
+      </div>
+
+      <!-- Arrow -->
+      <span class="mt-1 md:mt-2 font-sans text-ink-light group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 shrink-0">
+        &rarr;
+      </span>
+    </div>
+  </a>
+</article>

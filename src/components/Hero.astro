@@ -1,0 +1,78 @@
+---
+
+---
+
+<section class="relative min-h-screen flex flex-col justify-end md:justify-center px-6 sm:px-8 md:px-12 lg:px-24 py-20 md:py-section">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 lg:gap-24 items-center">
+    <!-- Left — headline + CTA -->
+    <div class="order-2 md:order-1">
+      <h1 class="font-serif text-display text-ink animate-fade-up">
+        The Final Word<br />
+        <span class="italic">in Academic</span><br />
+        Excellence.
+      </h1>
+
+      <div class="mt-8 md:mt-element max-w-lg animate-fade-up animate-delay-2">
+        <p class="text-base md:text-body text-ink-light leading-relaxed">
+          For university students across Ghana who refuse to settle.
+          We don't edit essays and theses — we architect them.
+        </p>
+      </div>
+
+      <div class="mt-8 md:mt-12 animate-fade-up animate-delay-3">
+        <a
+          href="#briefing"
+          class="group inline-flex items-center gap-4 bg-ink text-paper px-8 md:px-10 py-4 md:py-5 font-sans text-small tracking-widest uppercase hover:bg-accent transition-colors duration-300"
+        >
+          <span>Begin Your Briefing</span>
+          <span class="block w-8 h-px bg-current transition-all duration-300 group-hover:w-14"></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right — editorial image -->
+    <div class="order-1 md:order-2 animate-fade-up animate-delay-1">
+      <div class="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80"
+          alt="Open notebook with handwritten notes and a pen"
+          class="w-full h-full object-cover grayscale brightness-75 contrast-110"
+          loading="eager"
+        />
+        <!-- Subtle gradient overlay to blend into dark bg -->
+        <div class="absolute inset-0 bg-gradient-to-t from-paper via-transparent to-transparent opacity-60"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-paper via-transparent to-transparent opacity-30 md:opacity-40"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator — hidden on mobile -->
+  <div class="absolute bottom-12 left-8 md:left-12 animate-fade-up animate-delay-5 hidden md:block z-10">
+    <div class="flex flex-col items-center gap-3">
+      <span class="font-sans text-small text-ink-light tracking-widest uppercase" style="writing-mode: vertical-rl;">
+        Scroll
+      </span>
+      <div class="w-px h-12 bg-ink-faint relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-ink animate-scroll-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll-line {
+    0% {
+      transform: translateY(-100%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  .animate-scroll-line {
+    animation: scroll-line 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+</style>

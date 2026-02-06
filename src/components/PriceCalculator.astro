@@ -1,0 +1,111 @@
+---
+const tiers = [
+  {
+    level: '01',
+    name: 'Structural Review',
+    tagline: "You've written it. We fix the logic.",
+    description: 'Comprehensive structural analysis of your existing draft. We examine argument flow, logical consistency, and alignment with your brief — then deliver a precise remediation plan.',
+    label: 'Select Review',
+  },
+  {
+    level: '02',
+    name: 'Architecture',
+    tagline: 'We build the outline and research base.',
+    description: 'From a blank page to a defensible skeleton. We construct your essay or thesis architecture: research framework, chapter structure, literature mapping, and methodological scaffolding.',
+    label: 'Select Architecture',
+  },
+  {
+    level: '03',
+    name: 'Full Articulation',
+    tagline: 'The Verbatim experience.',
+    description: 'The complete engagement. From conceptual foundation to final draft — every sentence calibrated, every argument fortified, every citation verified. This is what we were built for.',
+    label: 'Select Articulation',
+    featured: true,
+  },
+];
+---
+
+<section id="services" class="px-6 sm:px-8 md:px-12 lg:px-24 py-16 md:py-section">
+  <!-- Section header -->
+  <div class="mb-12 md:mb-section" data-scroll-reveal>
+    <span class="font-sans text-small tracking-widest uppercase text-ink-light">
+      Cognitive Load Tiers
+    </span>
+    <h2 class="font-serif text-2xl md:text-heading mt-4 max-w-2xl">
+      Three levels of intervention.<br />
+      <span class="italic">One standard of excellence.</span>
+    </h2>
+  </div>
+
+  <!-- Tiers -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+    {tiers.map((tier) => (
+      <div
+        class:list={[
+          'group py-8 md:py-12 border-t border-ink-faint',
+          'lg:border-t-0 lg:border-l lg:pl-12 lg:pr-12 first:lg:border-l-0 first:lg:pl-0',
+          tier.featured && 'bg-paper-light border border-ink-faint px-6 sm:px-8 py-10 md:py-12 -mx-6 sm:-mx-8 lg:mx-0 lg:px-12 lg:-my-8 lg:border-l-0',
+        ]}
+        data-scroll-reveal
+      >
+        <!-- Level number -->
+        <span
+          class:list={[
+            'font-sans text-small tracking-widest uppercase',
+            tier.featured ? 'text-accent' : 'text-ink-light',
+          ]}
+        >
+          Level {tier.level}
+        </span>
+
+        <!-- Tier name -->
+        <h3 class="font-serif text-xl md:text-subheading mt-4">
+          {tier.name}
+        </h3>
+
+        <!-- Tagline -->
+        <p
+          class:list={[
+            'font-serif italic mt-2 text-sm md:text-base',
+            tier.featured ? 'text-ink-light' : 'text-ink-light',
+          ]}
+        >
+          {tier.tagline}
+        </p>
+
+        <!-- Description -->
+        <p
+          class:list={[
+            'mt-4 md:mt-6 text-base md:text-body leading-relaxed',
+            tier.featured ? 'text-ink-light' : 'text-ink-light',
+          ]}
+        >
+          {tier.description}
+        </p>
+
+        <!-- Pricing note -->
+        <p
+          class:list={[
+            'mt-4 md:mt-6 font-sans text-small tracking-wider uppercase',
+            tier.featured ? 'text-accent' : 'text-ink-light',
+          ]}
+        >
+          Pricing upon consultation
+        </p>
+
+        <!-- CTA -->
+        <a
+          href="#briefing"
+          class:list={[
+            'inline-flex items-center gap-3 mt-6 md:mt-8 font-sans text-small tracking-widest uppercase transition-all duration-300',
+            'text-ink hover:text-accent',
+          ]}
+          data-tier={tier.name}
+        >
+          <span>{tier.label}</span>
+          <span class="block w-8 h-px bg-current transition-all duration-300 group-hover:w-14"></span>
+        </a>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const testimonials = [
+  {
+    quote: "I came to Verbatim with a thesis that had been rejected twice. They didn't just fix it — they showed me where my argument collapsed and rebuilt it from the foundation. I defended with confidence.",
+    name: 'Akosua M.',
+    university: 'KNUST',
+    programme: 'MBA, Human Resource Management',
+    tier: 'Full Articulation',
+  },
+  {
+    quote: "My supervisor kept saying 'your methodology is weak' but never explained why. Verbatim broke it down for me in one session. The clarity was instant.",
+    name: 'Kwame A.',
+    university: 'University of Ghana, Legon',
+    programme: "Master's, Development Studies",
+    tier: 'Structural Review',
+  },
+  {
+    quote: "I was stuck for four months. Couldn't write a single chapter. They gave me a structure, a timeline, and a reason to believe I could actually finish. I submitted three weeks early.",
+    name: 'Esi T.',
+    university: 'UCC',
+    programme: 'B.Ed, Social Studies',
+    tier: 'Architecture',
+  },
+  {
+    quote: "The level of detail was unreal. Every paragraph had a purpose. Every citation was placed deliberately. This is not just editing — it's a different standard entirely.",
+    name: 'Nana Yaw K.',
+    university: 'Ashesi University',
+    programme: 'BSc, Computer Science',
+    tier: 'Full Articulation',
+  },
+  {
+    quote: "I recommended Verbatim to my entire study group. Two of them have already submitted. We all wish we had found them sooner.",
+    name: 'Abena S.',
+    university: 'GIMPA',
+    programme: 'MSc, Project Management',
+    tier: 'Architecture',
+  },
+  {
+    quote: "They treated my undergraduate essay with the same seriousness as a Master's thesis. No condescension, no shortcuts. Just precision.",
+    name: 'Kofi D.',
+    university: 'UPSA',
+    programme: 'BBA, Accounting',
+    tier: 'Structural Review',
+  },
+];
+---
+
+<Layout title="In Their Words" description="What students across Ghana say about working with Verbatim.">
+  <!-- Page header -->
+  <section class="px-6 sm:px-8 md:px-12 lg:px-24 pt-28 md:pt-40 pb-12 md:pb-16">
+    <div class="max-w-5xl">
+      <span class="font-sans text-small tracking-widest uppercase text-ink-light" data-scroll-reveal>
+        In Their Words
+      </span>
+      <h1 class="font-serif text-display mt-4 md:mt-6 max-w-3xl" data-scroll-reveal>
+        The work<br />
+        <span class="italic">speaks.</span>
+      </h1>
+      <p class="text-base md:text-body text-ink-light mt-6 md:mt-8 max-w-lg" data-scroll-reveal>
+        We don't advertise. We don't need to. Our clients do it for us.
+      </p>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="px-6 sm:px-8 md:px-12 lg:px-24 pb-16 md:pb-section">
+    <div class="max-w-5xl">
+      {testimonials.map((t, i) => (
+        <article
+          class:list={[
+            'py-12 md:py-20 border-t border-ink-faint',
+            i % 2 === 1 && 'md:ml-auto md:max-w-3xl',
+          ]}
+          data-scroll-reveal
+        >
+          <!-- Quote mark -->
+          <span class="block font-serif text-6xl md:text-8xl text-accent leading-none select-none" aria-hidden="true">
+            &ldquo;
+          </span>
+
+          <!-- Quote text -->
+          <blockquote class="font-serif text-xl sm:text-2xl md:text-heading leading-snug md:leading-tight mt-2 md:mt-4 max-w-2xl">
+            {t.quote}
+          </blockquote>
+
+          <!-- Attribution -->
+          <div class="mt-8 md:mt-12 flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-8">
+            <div>
+              <span class="font-serif text-lg md:text-xl block">
+                {t.name}
+              </span>
+              <span class="font-sans text-small text-ink-light mt-1 block">
+                {t.programme}
+              </span>
+              <span class="font-sans text-small text-ink-light">
+                {t.university}
+              </span>
+            </div>
+            <span class="font-sans text-small tracking-widest uppercase text-accent">
+              {t.tier}
+            </span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="px-6 sm:px-8 md:px-12 lg:px-24 py-16 md:py-section border-t border-ink-faint">
+    <div class="max-w-5xl" data-scroll-reveal>
+      <p class="font-serif text-2xl md:text-heading max-w-2xl">
+        Your name belongs here.
+      </p>
+      <div class="mt-8 md:mt-12">
+        <a
+          href="/#briefing"
+          class="group inline-flex items-center gap-4 bg-ink text-paper px-8 md:px-10 py-4 md:py-5 font-sans text-small tracking-widest uppercase hover:bg-accent transition-colors duration-300"
+        >
+          <span>Begin Your Briefing</span>
+          <span class="block w-8 h-px bg-current transition-all duration-300 group-hover:w-14"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
