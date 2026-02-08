@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import vercel from '@astrojs/vercel';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  integrations: [tailwind()],
+  site: 'https://verbatim.ink',
+  adapter: vercel(),
+  integrations: [tailwind(), sitemap()],
 });

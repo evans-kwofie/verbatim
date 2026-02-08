@@ -26,31 +26,29 @@ const currentYear = new Date().getFullYear();
           <a
             href="/"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
-            >Home</a>
+            >Home</a
+          >
         </li>
         <li>
           <a
             href="/#services"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
-            >Services</a>
-        </li>
-        <li>
-          <a
-            href="/in-their-words"
-            class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
-            >In Their Words</a>
+            >Services</a
+          >
         </li>
         <li>
           <a
             href="/resources"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
-            >Resources</a>
+            >Resources</a
+          >
         </li>
         <li>
           <a
             href="/#briefing"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
-            >Begin Briefing</a>
+            >Begin Briefing</a
+          >
         </li>
       </ul>
     </div>
@@ -65,7 +63,7 @@ const currentYear = new Date().getFullYear();
       <ul class="space-y-3">
         <li>
           <a
-            href="https://wa.me/233249884952"
+            href="https://wa.me/+233548249042"
             target="_blank"
             rel="noopener noreferrer"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
@@ -75,27 +73,45 @@ const currentYear = new Date().getFullYear();
         </li>
         <li>
           <a
-            href="tel:+233249884952"
+            href="tel:+233548249042"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300"
           >
-            +233 24 988 4952
+            +233 54 824 9042
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a
             href="mailto:hello@verbatim.consulting"
             class="text-base md:text-body text-ink hover:text-accent transition-colors duration-300 break-all"
           >
             hello@verbatim.consulting
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
 
+  <!-- Banner -->
+  <div
+    class="mt-16 md:mt-24 -mx-6 sm:-mx-8 md:-mx-12 lg:-mx-24 overflow-hidden"
+  >
+    <span
+      id="footer-banner"
+      class="flex justify-center font-serif text-[18vw] leading-[0.85] tracking-tight uppercase select-none whitespace-nowrap"
+    >
+      {
+        Array.from("VERBATIM").map((letter) => (
+          <span class="footer-letter text-ink-faint/10 transition-colors duration-500 ease-out">
+            {letter}
+          </span>
+        ))
+      }
+    </span>
+  </div>
+
   <!-- Bottom bar -->
   <div
-    class="mt-10 md:mt-16 pt-6 md:pt-8 border-t border-ink-faint flex flex-col md:flex-row items-start md:items-center justify-between gap-3"
+    class="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-ink-faint flex flex-col md:flex-row items-start md:items-center justify-between gap-3"
   >
     <span class="font-sans text-small text-ink-light">
       &copy; {currentYear} Verbatim. All rights reserved.
@@ -105,3 +121,32 @@ const currentYear = new Date().getFullYear();
     </span>
   </div>
 </footer>
+
+<script is:inline>
+  (function () {
+    var banner = document.getElementById("footer-banner");
+    if (!banner) return;
+    var letters = banner.querySelectorAll(".footer-letter");
+
+    banner.addEventListener("mousemove", function (e) {
+      letters.forEach(function (letter) {
+        var rect = letter.getBoundingClientRect();
+        var letterCenterX = rect.left + rect.width / 2;
+        var dist = Math.abs(e.clientX - letterCenterX);
+        var threshold = rect.width * 1.2;
+
+        if (dist < threshold) {
+          letter.style.color = "#F0EDE8";
+        } else {
+          letter.style.color = "";
+        }
+      });
+    });
+
+    banner.addEventListener("mouseleave", function () {
+      letters.forEach(function (letter) {
+        letter.style.color = "";
+      });
+    });
+  })();
+</script>

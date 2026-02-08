@@ -18,6 +18,7 @@ const disciplines = [
   'Communication Studies',
   'Information Technology',
   'Planning',
+  'And Many More',
 ];
 ---
 
@@ -31,7 +32,7 @@ const disciplines = [
   <div id="disciplines-list" class="relative px-6 sm:px-8 md:px-12 lg:px-24">
     {disciplines.map((d) => (
       <p
-        class="discipline-item font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl py-3 md:py-4 text-ink-faint transition-colors duration-200"
+        class={`discipline-item font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl py-3 md:py-4 text-ink-faint transition-colors duration-200 ${d === 'And Many More' ? 'italic' : ''}`}
         data-discipline
       >
         {d}

@@ -6,9 +6,15 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description = 'Premium academic writing and thesis consulting for university students across Ghana.' } = Astro.props;
+const { title, description = 'Premium academic writing and thesis consulting for university students across Ghana.', ogImage = '/og-image.png' } = Astro.props;
+
+const siteUrl = 'https://verbatim.ink';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const fullTitle = `${title} — Verbatim`;
+const ogImageUrl = new URL(ogImage, siteUrl).href;
 ---
 
 <!doctype html>
@@ -17,8 +23,24 @@ const { title, description = 'Premium academic writing and thesis consulting for
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#000000" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Verbatim" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,8 +50,21 @@ const { title, description = 'Premium academic writing and thesis consulting for
       rel="stylesheet"
     />
 
-    <title>{title} — Verbatim</title>
+    <title>{fullTitle}</title>
     <meta name="view-transition" content="same-origin" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Verbatim",
+      "url": siteUrl,
+      "logo": `${siteUrl}/assets/logo.webp`,
+      "description": "Premium academic writing and thesis consulting for university students across Ghana.",
+      "areaServed": { "@type": "Country", "name": "Ghana" },
+      "serviceType": "Academic Consulting",
+      "telephone": "+233548249042",
+    })} />
 
     <!-- Prevent flash of page content before loader -->
     <style>

@@ -29,3 +29,8 @@ yarn-error.log*
 
 # misc
 *.tsbuildinfo
+
+
+agent.md
+/agent.md
+./agent.md
