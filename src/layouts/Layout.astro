@@ -1,7 +1,7 @@
 ---
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -9,9 +9,13 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'Premium academic writing and thesis consulting for university students across Ghana.', ogImage = '/og_image.webp' } = Astro.props;
+const {
+  title,
+  description = "Premium academic writing and thesis consulting for university students across Ghana.",
+  ogImage = "/og_image.webp",
+} = Astro.props;
 
-const siteUrl = 'https://verbatim.ink';
+const siteUrl = "https://verbatim.ink";
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const fullTitle = `${title} — Verbatim`;
 const ogImageUrl = new URL(ogImage, siteUrl).href;
@@ -44,7 +48,10 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <meta name="twitter:image:alt" content="Verbatim — Premium academic writing and thesis consulting" />
+    <meta
+      name="twitter:image:alt"
+      content="Verbatim — Premium academic writing and thesis consulting"
+    />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,41 +65,74 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <meta name="view-transition" content="same-origin" />
 
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Verbatim",
-      "url": siteUrl,
-      "logo": `${siteUrl}/assets/logo.webp`,
-      "description": "Premium academic writing and thesis consulting for university students across Ghana.",
-      "areaServed": { "@type": "Country", "name": "Ghana" },
-      "serviceType": "Academic Consulting",
-      "telephone": "+233548249042",
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "Verbatim",
+        url: siteUrl,
+        logo: `${siteUrl}/assets/logo.webp`,
+        description:
+          "Premium academic writing and thesis consulting for university students across Ghana.",
+        areaServed: { "@type": "Country", name: "Ghana" },
+        serviceType: "Academic Consulting",
+        telephone: "+233505786411",
+      })}
+    />
 
     <!-- Prevent flash of page content before loader -->
     <style>
-      .page-content { opacity: 0; }
-      .page-content.loaded { opacity: 1; }
+      .page-content {
+        opacity: 0;
+      }
+      .page-content.loaded {
+        opacity: 1;
+      }
     </style>
   </head>
   <body class="min-h-screen bg-paper text-ink overflow-x-hidden">
-
     <!-- ═══ Preloader ═══ -->
-    <div id="preloader" class="fixed inset-0 z-[9999] flex items-center justify-center">
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[9999] flex items-center justify-center"
+    >
       <!-- Two curtain panels (behind the text) -->
-      <div id="curtain-left" class="absolute top-0 bottom-0 left-0 w-1/2 bg-paper"></div>
-      <div id="curtain-right" class="absolute top-0 bottom-0 right-0 w-1/2 bg-paper"></div>
+      <div
+        id="curtain-left"
+        class="absolute top-0 bottom-0 left-0 w-1/2 bg-paper"
+      >
+      </div>
+      <div
+        id="curtain-right"
+        class="absolute top-0 bottom-0 right-0 w-1/2 bg-paper"
+      >
+      </div>
 
       <!-- Wordmark (above curtains) -->
       <div class="relative z-10 text-center">
-        <h2 class="font-serif text-4xl md:text-6xl tracking-wider uppercase overflow-hidden">
-          <span id="preloader-text" class="inline-block" style="transform: translateY(100%); opacity: 0;">
+        <h2
+          class="font-serif text-4xl md:text-6xl tracking-wider uppercase overflow-hidden"
+        >
+          <span
+            id="preloader-text"
+            class="inline-block"
+            style="transform: translateY(100%); opacity: 0;"
+          >
             Verbatim
           </span>
         </h2>
-        <div id="preloader-line" class="mx-auto mt-6 h-px bg-accent" style="width: 0;"></div>
-        <p id="preloader-tagline" class="font-sans text-small tracking-widest uppercase text-ink-light mt-4" style="opacity: 0;">
+        <div
+          id="preloader-line"
+          class="mx-auto mt-6 h-px bg-accent"
+          style="width: 0;"
+        >
+        </div>
+        <p
+          id="preloader-tagline"
+          class="font-sans text-small tracking-widest uppercase text-ink-light mt-4"
+          style="opacity: 0;"
+        >
           Academic Excellence
         </p>
       </div>
@@ -119,64 +159,67 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <!-- ═══ Preloader Script ═══ -->
     <script is:inline>
       (function () {
-        var preloader = document.getElementById('preloader');
-        var text = document.getElementById('preloader-text');
-        var line = document.getElementById('preloader-line');
-        var tagline = document.getElementById('preloader-tagline');
-        var curtainLeft = document.getElementById('curtain-left');
-        var curtainRight = document.getElementById('curtain-right');
-        var pageContent = document.querySelector('.page-content');
+        var preloader = document.getElementById("preloader");
+        var text = document.getElementById("preloader-text");
+        var line = document.getElementById("preloader-line");
+        var tagline = document.getElementById("preloader-tagline");
+        var curtainLeft = document.getElementById("curtain-left");
+        var curtainRight = document.getElementById("curtain-right");
+        var pageContent = document.querySelector(".page-content");
 
         if (!preloader) return;
 
         // Lock scroll during preloader
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
 
         // Phase 1: Wordmark slides up
         setTimeout(function () {
-          text.style.transition = 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease';
-          text.style.transform = 'translateY(0)';
-          text.style.opacity = '1';
+          text.style.transition =
+            "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease";
+          text.style.transform = "translateY(0)";
+          text.style.opacity = "1";
         }, 200);
 
         // Phase 2: Line expands
         setTimeout(function () {
-          line.style.transition = 'width 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-          line.style.width = '120px';
+          line.style.transition = "width 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
+          line.style.width = "120px";
         }, 500);
 
         // Phase 3: Tagline fades in
         setTimeout(function () {
-          tagline.style.transition = 'opacity 0.4s ease';
-          tagline.style.opacity = '1';
+          tagline.style.transition = "opacity 0.4s ease";
+          tagline.style.opacity = "1";
         }, 800);
 
         // Phase 4: Fade out text
         setTimeout(function () {
-          text.style.transition = 'opacity 0.3s ease';
-          text.style.opacity = '0';
-          line.style.transition = 'opacity 0.3s ease';
-          line.style.opacity = '0';
-          tagline.style.transition = 'opacity 0.3s ease';
-          tagline.style.opacity = '0';
+          text.style.transition = "opacity 0.3s ease";
+          text.style.opacity = "0";
+          line.style.transition = "opacity 0.3s ease";
+          line.style.opacity = "0";
+          tagline.style.transition = "opacity 0.3s ease";
+          tagline.style.opacity = "0";
         }, 1600);
 
         // Phase 5: Curtains slide apart + reveal page
         setTimeout(function () {
-          curtainLeft.style.transition = 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
-          curtainLeft.style.transform = 'translateX(-100%)';
+          curtainLeft.style.transition =
+            "transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)";
+          curtainLeft.style.transform = "translateX(-100%)";
 
-          curtainRight.style.transition = 'transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)';
-          curtainRight.style.transform = 'translateX(100%)';
+          curtainRight.style.transition =
+            "transform 0.8s cubic-bezier(0.76, 0, 0.24, 1)";
+          curtainRight.style.transform = "translateX(100%)";
 
-          pageContent.style.transition = 'opacity 0.6s ease 0.2s';
-          pageContent.classList.add('loaded');
+          pageContent.style.transition = "opacity 0.6s ease 0.2s";
+          pageContent.classList.add("loaded");
         }, 1900);
 
         // Phase 6: Cleanup
         setTimeout(function () {
-          preloader.style.display = 'none';
-          document.body.style.overflow = '';
+          preloader.style.display = "none";
+          document.body.style.overflow = "";
         }, 2800);
       })();
     </script>
@@ -184,10 +227,10 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <!-- Custom cursor script -->
     <script is:inline>
       (function () {
-        if (window.matchMedia('(pointer: coarse)').matches) return;
+        if (window.matchMedia("(pointer: coarse)").matches) return;
 
-        const dot = document.querySelector('.cursor-dot');
-        const outline = document.querySelector('.cursor-outline');
+        const dot = document.querySelector(".cursor-dot");
+        const outline = document.querySelector(".cursor-outline");
         if (!dot || !outline) return;
 
         let mouseX = 0;
@@ -195,42 +238,50 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
         let outlineX = 0;
         let outlineY = 0;
 
-        document.addEventListener('mousemove', (e) => {
+        document.addEventListener("mousemove", (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
-          dot.style.left = mouseX + 'px';
-          dot.style.top = mouseY + 'px';
+          dot.style.left = mouseX + "px";
+          dot.style.top = mouseY + "px";
         });
 
         function animateOutline() {
           outlineX += (mouseX - outlineX) * 0.12;
           outlineY += (mouseY - outlineY) * 0.12;
-          outline.style.left = outlineX + 'px';
-          outline.style.top = outlineY + 'px';
+          outline.style.left = outlineX + "px";
+          outline.style.top = outlineY + "px";
           requestAnimationFrame(animateOutline);
         }
         animateOutline();
 
-        document.addEventListener('mouseover', (e) => {
-          if (e.target.closest('a, button, [role="button"], input, textarea, select, label')) {
-            outline.classList.add('cursor-hover');
-            dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        document.addEventListener("mouseover", (e) => {
+          if (
+            e.target.closest(
+              'a, button, [role="button"], input, textarea, select, label',
+            )
+          ) {
+            outline.classList.add("cursor-hover");
+            dot.style.transform = "translate(-50%, -50%) scale(1.5)";
           }
         });
-        document.addEventListener('mouseout', (e) => {
-          if (e.target.closest('a, button, [role="button"], input, textarea, select, label')) {
-            outline.classList.remove('cursor-hover');
-            dot.style.transform = 'translate(-50%, -50%) scale(1)';
+        document.addEventListener("mouseout", (e) => {
+          if (
+            e.target.closest(
+              'a, button, [role="button"], input, textarea, select, label',
+            )
+          ) {
+            outline.classList.remove("cursor-hover");
+            dot.style.transform = "translate(-50%, -50%) scale(1)";
           }
         });
 
-        document.addEventListener('mouseleave', () => {
-          dot.style.opacity = '0';
-          outline.style.opacity = '0';
+        document.addEventListener("mouseleave", () => {
+          dot.style.opacity = "0";
+          outline.style.opacity = "0";
         });
-        document.addEventListener('mouseenter', () => {
-          dot.style.opacity = '1';
-          outline.style.opacity = '1';
+        document.addEventListener("mouseenter", () => {
+          dot.style.opacity = "1";
+          outline.style.opacity = "1";
         });
       })();
     </script>
@@ -238,7 +289,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <!-- Global scroll-reveal script -->
     <script is:inline>
       (function () {
-        var items = document.querySelectorAll('[data-scroll-reveal]');
+        var items = document.querySelectorAll("[data-scroll-reveal]");
         if (!items.length) return;
 
         function updateReveal() {
@@ -257,28 +308,28 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
           });
         }
 
-        window.addEventListener('scroll', updateReveal, { passive: true });
-        window.addEventListener('resize', updateReveal);
+        window.addEventListener("scroll", updateReveal, { passive: true });
+        window.addEventListener("resize", updateReveal);
         updateReveal();
       })();
     </script>
 
     <!-- View transition ink bleed script -->
     <script is:inline>
-      document.addEventListener('astro:before-preparation', () => {
-        const overlay = document.querySelector('.ink-bleed-overlay');
+      document.addEventListener("astro:before-preparation", () => {
+        const overlay = document.querySelector(".ink-bleed-overlay");
         if (overlay) {
-          overlay.style.opacity = '1';
-          overlay.classList.add('active');
+          overlay.style.opacity = "1";
+          overlay.classList.add("active");
         }
       });
 
-      document.addEventListener('astro:after-swap', () => {
-        const overlay = document.querySelector('.ink-bleed-overlay');
+      document.addEventListener("astro:after-swap", () => {
+        const overlay = document.querySelector(".ink-bleed-overlay");
         if (overlay) {
-          overlay.classList.remove('active');
-          overlay.style.opacity = '0';
-          overlay.style.clipPath = 'circle(0% at 50% 50%)';
+          overlay.classList.remove("active");
+          overlay.style.opacity = "0";
+          overlay.style.clipPath = "circle(0% at 50% 50%)";
         }
       });
     </script>
