@@ -82,12 +82,25 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     />
 
     <!-- Prevent flash of page content before loader -->
+    <script is:inline>
+      // Skip preloader if user has already seen it this session
+      if (sessionStorage.getItem("verbatim-loaded")) {
+        document.documentElement.classList.add("skip-preloader");
+      }
+    </script>
     <style>
       .page-content {
         opacity: 0;
       }
       .page-content.loaded {
         opacity: 1;
+      }
+      /* Instantly show content when preloader is skipped */
+      .skip-preloader .page-content {
+        opacity: 1;
+      }
+      .skip-preloader #preloader {
+        display: none;
       }
     </style>
   </head>
@@ -159,6 +172,9 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
     <!-- ═══ Preloader Script ═══ -->
     <script is:inline>
       (function () {
+        // Skip if already seen this session
+        if (sessionStorage.getItem("verbatim-loaded")) return;
+
         var preloader = document.getElementById("preloader");
         var text = document.getElementById("preloader-text");
         var line = document.getElementById("preloader-line");
@@ -220,6 +236,7 @@ const ogImageUrl = new URL(ogImage, siteUrl).href;
         setTimeout(function () {
           preloader.style.display = "none";
           document.body.style.overflow = "";
+          sessionStorage.setItem("verbatim-loaded", "1");
         }, 2800);
       })();
     </script>
